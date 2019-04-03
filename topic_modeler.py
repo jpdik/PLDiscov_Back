@@ -6,8 +6,6 @@ import os, zipfile, io, requests
 
 import pandas as pd
 import numpy as np
-from nltk import word_tokenize
-import nltk
 from string import punctuation
 from sklearn.decomposition import NMF
 import json
@@ -18,11 +16,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 import downloadGoogle as dg
 
-try:
-    stopwords = nltk.corpus.stopwords.words('portuguese')
-except LookupError:
-    nltk.download('stopwords')
-    
 numbers = '0123456789'
 
 def download_and_unpack(link_id):
