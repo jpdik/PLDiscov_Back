@@ -1,2 +1,2 @@
-# PLDicov_Back
+# PLDiscov_Back
 Projeto Final de machine learning
