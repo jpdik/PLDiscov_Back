@@ -1,7 +1,8 @@
 #coding: utf-8
 
-import settings
 import os
+if os.path.isfile('.env'):
+    import settings
 
 import paypalrestsdk
 from flask import Flask, request, redirect, g, render_template, jsonify

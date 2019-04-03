@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import settings
-import os, zipfile, io, requests
+import os
+if os.path.isfile('.env'):
+    import settings
+import zipfile, io, requests
 
 import pandas as pd
 import numpy as np
@@ -23,12 +25,14 @@ def download_and_unpack(link_id):
 
 def recarregar_documento():
     df = ''
-    get_folder = os.getenv('DATA_CSV', 'data/all_pp.csv')
+    get_folder = os.getenv('DATA_CSV', 'data/all_pp.csv.zip')
     if not 'data' in get_folder:
         df = download_and_unpack(get_folder)
     else:
         print("* unpacking data.")
-        df = pd.read_csv(get_folder)
+        with zipfile.ZipFile(get_folder) as zip:
+            with zip.open('all_pp.csv') as myZip:
+                df = pd.read_csv(myZip, engine='python')
     return df.dropna()
 
 df = recarregar_documento()
