@@ -33,7 +33,6 @@ jwt = JWTManager(app)
 
 
 def getAmmount(typeAcc):
-    print(typeAcc)
     if typeAcc == 1:
         return 4
     elif typeAcc == 2:
@@ -45,8 +44,6 @@ def getAmmount(typeAcc):
 
 
 def checkAmmountSearchs(usuario):
-    print(usuario)
-
     if 'todaySearch' in usuario and usuario['todaySearch'] < datetime.now():
         usuario['searchedToday'] = 0
 
@@ -162,8 +159,6 @@ def checkPurchase():
 
     data = request.json['data']
 
-    print(data)
-
     current_user = get_jwt_claims()
 
     if current_user:
@@ -251,7 +246,7 @@ def index():
             return json.dumps({"musics": musics, "number_searchs": searchs})
         else:
             return jsonify({'msg': 'Você excedeu o limite de buscas de hoje.'}), 400
-    return json.dumps(spotify.search_music('Hot n Cold', 'Hopelessly Devoted To You'))
+    return jsonify({'msg': 'Você precisa informar uma busca.'}), 400
 
 
 if __name__ == "__main__":

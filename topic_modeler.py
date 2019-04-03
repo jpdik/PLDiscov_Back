@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import settings
+import os, zipfile, io, requests
+
 import pandas as pd
 import numpy as np
 from nltk import word_tokenize
@@ -13,11 +16,22 @@ from sklearn.metrics.pairwise import cosine_similarity
 # Vetorização
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+import downloadGoogle as dg
+
 stopwords = nltk.corpus.stopwords.words('portuguese')
 numbers = '0123456789'
 
+def download_and_unpack(link_id):
+    return dg.download_file_from_google_drive(link_id)
+
 def recarregar_documento():
-    df = pd.read_csv('data/all_pp.csv')
+    df = ''
+    get_folder = os.getenv('DATA_CSV', 'data/all_pp.csv')
+    if not 'data' in get_folder:
+        df = download_and_unpack(get_folder)
+    else:
+        print("* unpacking data.")
+        df = pd.read_csv(get_folder)
     return df.dropna()
 
 df = recarregar_documento()
