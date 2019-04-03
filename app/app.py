@@ -14,9 +14,9 @@ from flask_jwt_extended import (
 from datetime import datetime, timedelta
 
 from flask_cors import CORS
-import spotify
+import app.spotify
 import json
-import topic_modeler as tm
+import app.topic_modeler as tm
 
 # Banco de Dados
 import pymongo

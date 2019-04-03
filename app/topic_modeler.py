@@ -16,7 +16,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # Vetorização
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-import downloadGoogle as dg
+import app.downloadGoogle as dg
 
 numbers = '0123456789'
 
@@ -25,7 +25,7 @@ def download_and_unpack(link_id):
 
 def recarregar_documento():
     df = ''
-    get_folder = os.getenv('DATA_CSV', 'data/all_pp.csv')
+    get_folder = os.getenv('DATA_CSV', 'app/data/all_pp.csv')
     if not 'data' in get_folder:
         df = download_and_unpack(get_folder)
     else:
