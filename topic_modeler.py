@@ -25,14 +25,12 @@ def download_and_unpack(link_id):
 
 def recarregar_documento():
     df = ''
-    get_folder = os.getenv('DATA_CSV', 'data/all_pp.csv.zip')
+    get_folder = os.getenv('DATA_CSV', 'data/all_pp.csv')
     if not 'data' in get_folder:
         df = download_and_unpack(get_folder)
     else:
         print("* unpacking data.")
-        with zipfile.ZipFile(get_folder) as zip:
-            with zip.open('all_pp.csv') as myZip:
-                df = pd.read_csv(myZip, engine='python')
+        df = pd.read_csv(get_folder)
     return df.dropna()
 
 df = recarregar_documento()
