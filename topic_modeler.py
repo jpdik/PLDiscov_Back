@@ -18,7 +18,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 import downloadGoogle as dg
 
-stopwords = nltk.corpus.stopwords.words('portuguese')
+try:
+    stopwords = nltk.corpus.stopwords.words('portuguese')
+except LookupError:
+    nltk.download('stopwords')
+    
 numbers = '0123456789'
 
 def download_and_unpack(link_id):
