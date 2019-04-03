@@ -73,9 +73,10 @@ def addAmmountSearch(usuario):
 def validPremium(usuario):
     usuarios = banco['usuarios']
 
-    if usuario['expiration_buy'] < datetime.now():
-        usuario['type'] = 0
-        usuarios.update_one({'email': usuario['email']}, {"$set": usuario})
+    if usuario['type'] > 0:
+        if usuario['expiration_buy'] < datetime.now():
+            usuario['type'] = 0
+            usuarios.update_one({'email': usuario['email']}, {"$set": usuario})
 
     return usuario
 
@@ -250,4 +251,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host=0.0.0.0, debug=True)
